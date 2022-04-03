@@ -1,6 +1,4 @@
 const express = require('express');
-const { listen } = require('express/lib/application');
-const { dirname } = require('path');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const { Pool } = require('pg');
@@ -13,10 +11,10 @@ const pool = new Pool({
 });
 
 express()
-  .use(express.static(path.join(_dirname, 'public')))
+  .use(express.static(path.join(__dirname, 'public')))
   .use(express.json())
   .use(express.urlencoded({ extended: true}))
-  .set('views', path.join(_dirname, 'views'))
+  .set('views', path.join(__dirname, 'views'))
   .get('/', async(req, res) => {
     try {
       const client = await pool.connect();
