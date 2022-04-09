@@ -6,10 +6,14 @@
   </head>
   <body>
     <h1>PE Tracker</h1>
-    <% tasks.forEach(function(r) { %>
-      <button id='<%= r.id %>'
-        onclick='javascript:logTask(<%= r.id %>);'><%= r.name %></button>
-    <% }); %>
+    <ul style="list-style-type:none; line-height: 2.5;">
+      <% tasks.forEach(function(r) { %>
+        <li>
+          <button id='<%= r.id %>'
+            onclick='javascript:logTask(<%= r.id %>);'><%= r.name %></button>
+        </li>
+      <% }); %>
+    </ul>
     <script>
       let currentTaskId = null;
 
@@ -30,7 +34,7 @@
             users_id: -1,
             students_id: -1,
             tasks_id: id,
-            duration: observationTime //"'+00:00:01'"
+            duration: observationTime // format is "'+00:00:01'"
           })
         });
         const result = await response.json();
@@ -41,18 +45,15 @@
 
       function convertTime(ms){
 
-        let seconds = parseInt((ms/1000) % 60)
-        let minutes = parseInt((ms/(1000 * 60)) % 60)
+        let seconds = parseInt((ms/1000) % 60);
+        let minutes = parseInt((ms/(1000 * 60)) % 60);
         let hours = parseInt((ms/(1000 * 60 * 60)) % 24);
-        //let calcTime = "";
 
-        hours = (hours < 10) ? "0" + hours : hours;
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
+        hoursTime = (hours < 10) ? ("0" + hours) : hours;
+        minutesTime = (minutes < 10) ? ("0" + minutes) : minutes;
+        secondsTime = (seconds < 10) ? ("0" + seconds) : seconds;
 
-        //let calcTime = "'" + hours + ":" + minutes + ":" + seconds + "'";
-
-        return "'" + hours + ":" + minutes + ":" + seconds + "'";
+        return "'" + hoursTime + ":" + minutesTime + ":" + secondsTime + "'";
       }
 
     </script>
